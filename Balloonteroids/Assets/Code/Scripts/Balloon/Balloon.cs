@@ -12,5 +12,13 @@ namespace Balloonteroids.Code.Scripts.Balloon
 			int r = UnityEngine.Random.Range(0, 4);
 			(renderer as SpriteRenderer).sprite = Sprites[r];
 		}
+		
+		void OnTriggerEnter2D(Collider2D other)
+		{
+			if (other.tag == "Player")
+			{
+				Destroy(this.gameObject);
+			}
+		}
 	}
 }
