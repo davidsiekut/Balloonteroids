@@ -4,7 +4,7 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: Player 1
     21300002: Player_Idle
-    21300004: Player_Shoot
+    21300004: Player_Shooting
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,7 +56,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .5, y: .349999994}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Player_Shoot
+    - name: Player_Shooting
       rect:
         serializedVersion: 2
         x: 45

@@ -29,6 +29,9 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 				v.y = MaxSpeed;
 				rigidbody2D.velocity = v;
 			}
+			
+			//if (transform.childCount == 0)
+			//	Destroy(gameObject);
 		}
 	}
 }

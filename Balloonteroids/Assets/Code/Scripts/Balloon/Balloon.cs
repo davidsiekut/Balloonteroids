@@ -19,6 +19,12 @@ namespace Balloonteroids.Code.Scripts.Balloon
 			{
 				Destroy(this.gameObject);
 			}
+			
+			if (other.name == "Bullet(Clone)")
+			{
+				Destroy(other.gameObject);
+				Destroy(this.gameObject);
+			}
 		}
 	}
 }
