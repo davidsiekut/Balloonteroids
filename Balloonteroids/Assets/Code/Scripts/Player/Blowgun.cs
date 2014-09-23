@@ -6,7 +6,7 @@ namespace Balloonteroids.Code.Scripts.Player
 	public class Blowgun : MonoBehaviour
 	{
 		public GameObject Bullet;
-		float Cooldown = 0.5f;
+		float Cooldown = 0.3f;
 
 		void Start()
 		{

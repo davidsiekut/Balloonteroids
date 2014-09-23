@@ -35,6 +35,7 @@ namespace Balloonteroids.Code.Scripts.Player
 			if (Input.GetButton("Jump"))
 			{
 				Blowgun.GetComponent<Blowgun>().Shoot();
+				// TODO sync with canShoot
 				animator.SetBool("IsShooting", true);
 			}
 			else
