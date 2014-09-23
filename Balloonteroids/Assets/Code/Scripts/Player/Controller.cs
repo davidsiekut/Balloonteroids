@@ -16,7 +16,7 @@ namespace Balloonteroids.Code.Scripts.Player
 		
 		void FixedUpdate()
 		{
-			transform.Rotate (-Vector3.forward * Input.GetAxis("Horizontal") * TurnSpeed * Time.fixedDeltaTime); 
+			transform.Rotate(-Vector3.forward * Input.GetAxis("Horizontal") * TurnSpeed * Time.fixedDeltaTime); 
 						
 			if(Input.GetAxis("Vertical") > 0)
 			{

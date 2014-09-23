@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Wrap : MonoBehaviour
+namespace Balloonteroids.Code.Scripts.Entity
 {
-	void Start()
+	public class Wrap : MonoBehaviour
 	{
-	}
-	
-	void FixedUpdate()
-	{
-		Vector3 v = Camera.main.WorldToViewportPoint(transform.position);
-		Vector3 newPos = transform.position;
-
-		if (v.x < 0 || v.x > 1)
+		void Start()
 		{
-			newPos.x = -newPos.x;
-		}
-	
-		if (v.y < 0 || v.y > 1)
-		{
-			newPos.y = -newPos.y;
 		}
 		
-		transform.position = newPos;
+		void FixedUpdate()
+		{
+			Vector3 v = Camera.main.WorldToViewportPoint(transform.position);
+			Vector3 newPos = transform.position;
+	
+			if (v.x < 0 || v.x > 1)
+			{
+				newPos.x = -newPos.x;
+			}
+		
+			if (v.y < 0 || v.y > 1)
+			{
+				newPos.y = -newPos.y;
+			}
+			
+			transform.position = newPos;
+		}
 	}
 }

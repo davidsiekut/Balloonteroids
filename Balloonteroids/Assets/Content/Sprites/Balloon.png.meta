@@ -1,10 +1,12 @@
 fileFormatVersion: 2
-guid: abd1fc9bcc45d4847bbdaf18e23c6bfe
+guid: f60aef1cd7ca243fbb672cf5f81f1f92
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Player 1
-    21300002: Player_Idle
-    21300004: Player_Shoot
+    21300000: Balloons
+    21300002: Balloon_Red
+    21300004: Balloon_Green
+    21300006: Balloon_Blue
+    21300008: Balloon_Pink
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -46,25 +48,45 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Player_Idle
+    - name: Balloon_Red
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 33
-        height: 73
-      alignment: 9
-      pivot: {x: .5, y: .349999994}
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Player_Shoot
+    - name: Balloon_Green
       rect:
         serializedVersion: 2
-        x: 45
+        x: 33
         y: 0
-        width: 33
-        height: 73
-      alignment: 9
-      pivot: {x: .5, y: .349999994}
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Balloon_Blue
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Balloon_Pink
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
