@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using Balloonteroids.Code.Scripts.Game;
+using Balloonteroids.Code.Scripts.BalloonCluster;
 
 namespace Balloonteroids.Code.Scripts.Balloon
 {
@@ -19,12 +20,20 @@ namespace Balloonteroids.Code.Scripts.Balloon
 		{
 			if (other.tag == "Player")
 			{
-				Destroy(this.gameObject);
+				//Destroy(this.gameObject);
 			}
 			
 			if (other.name == "Bullet(Clone)")
 			{
-				GameController.ShowScorePopup(transform.position);
+				if (transform.parent.GetComponent<BalloonFactory>().Pop() == 0)
+				{
+					GameController.ShowScorePopup(transform.position, 2);
+				}
+				else
+				{
+					GameController.ShowScorePopup(transform.position, 1);
+				}
+
 				Destroy(other.gameObject);
 				Destroy(this.gameObject);
 			}

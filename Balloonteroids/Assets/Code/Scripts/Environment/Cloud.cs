@@ -19,9 +19,9 @@ public class Cloud : MonoBehaviour
 	void Update()
 	{
 		transform.Translate(-Vector3.right * speed * Time.deltaTime);
-		if (!GetComponent<SpriteRenderer>().isVisible)
+		if (Camera.main.WorldToViewportPoint(transform.position).x < 0)
 		{
-			//Destroy(gameObject);
+			Destroy(gameObject);
 		}
 	}
 }

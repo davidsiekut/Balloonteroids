@@ -10,6 +10,7 @@ namespace Balloonteroids.Code.Scripts.Player
 		public float TurnSpeed = 0.0f;
 		public GameObject Jetpack;
 		public GameObject Blowgun;
+		public bool CanControl = true;
 		
 		Animator animator;
 		
@@ -20,27 +21,30 @@ namespace Balloonteroids.Code.Scripts.Player
 		
 		void FixedUpdate()
 		{
-			transform.Rotate(-Vector3.forward * Input.GetAxis("Horizontal") * TurnSpeed * Time.fixedDeltaTime); 
-						
-			if (Input.GetAxis("Vertical") > 0)
+			if (CanControl)
 			{
-				if (Jetpack.GetComponent<ParticleSystem>().isStopped)
+				transform.Rotate(-Vector3.forward * Input.GetAxis("Horizontal") * TurnSpeed * Time.fixedDeltaTime); 
+							
+				if (Input.GetAxis("Vertical") > 0)
 				{
-					Jetpack.GetComponent<ParticleSystem>().Play();
+					if (Jetpack.GetComponent<ParticleSystem>().isStopped)
+					{
+						Jetpack.GetComponent<ParticleSystem>().Play();
+					}
+	
+					rigidbody2D.AddRelativeForce(Vector3.up * Acceleration * Time.fixedDeltaTime); 
 				}
-
-				rigidbody2D.AddRelativeForce(Vector3.up * Acceleration * Time.fixedDeltaTime); 
-			}
-			
-			if (Input.GetButton("Jump"))
-			{
-				Blowgun.GetComponent<Blowgun>().Shoot();
-				// TODO sync with canShoot
-				animator.SetBool("IsShooting", true);
-			}
-			else
-			{
-				animator.SetBool("IsShooting", false);
+				
+				if (Input.GetButton("Jump"))
+				{
+					Blowgun.GetComponent<Blowgun>().Shoot();
+					// TODO sync with canShoot
+					animator.SetBool("IsShooting", true);
+				}
+				else
+				{
+					animator.SetBool("IsShooting", false);
+				}
 			}
 		}
 	}

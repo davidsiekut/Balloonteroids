@@ -6,6 +6,8 @@ namespace Balloonteroids.Code.Scripts.Game
 {
 	public class GameController : ScriptableObject
 	{
+		public float SpawnRate;	
+		float spawnRate;
 		public GameObject BalloonCluster;
 		public static GameObject MainCanvas;
 		static Text ScoreText;
@@ -15,17 +17,17 @@ namespace Balloonteroids.Code.Scripts.Game
 		{
 			MainCanvas = GameObject.FindWithTag("Canvas");
 			ScoreText = GameObject.FindWithTag("Score").GetComponent<Text>();
-			
-			for(int i = 0; i < 20; i++)
-			{
-				GameObject g = GameObject.Instantiate(BalloonCluster) as GameObject;
-				g.transform.position = new Vector3(0, 5, 0);
-			}
 		}
 		
 		void Update()
 		{
-			
+			spawnRate -= Time.deltaTime;
+			if (spawnRate < 0)
+			{
+				spawnRate = SpawnRate;
+				GameObject g = GameObject.Instantiate(BalloonCluster) as GameObject;
+				g.transform.position = new Vector3(0, 5, 0);
+			}
 		}
 		
 		static void addScore(int i)
@@ -34,12 +36,12 @@ namespace Balloonteroids.Code.Scripts.Game
 			ScoreText.text = score + "";
 		}
 		
-		public static void ShowScorePopup(Vector3 position)
+		public static void ShowScorePopup(Vector3 position, int i)
 		{
 			GameObject g = GameObject.Instantiate(Resources.Load("Prefabs/UI/ScorePopup")) as GameObject;
 			g.transform.position = Camera.main.WorldToScreenPoint(position);
-			g.GetComponent<Text>().text = "+1";
-			addScore(1);
+			g.GetComponent<Text>().text = "+" + i;
+			addScore(i);
 			g.transform.parent = MainCanvas.transform;
 		}
 	}

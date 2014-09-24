@@ -6,10 +6,13 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 	public class BalloonFactory : MonoBehaviour
 	{
 		public GameObject Balloon;
-	
+		private int balloons;
+		
 		void Start()
 		{
 			int r = UnityEngine.Random.Range(1, 10);
+			balloons = r;
+			
 			for (int i = 0; i < r; i++)
 			{
 				float j = i * 0.1f;
@@ -22,9 +25,16 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 			}
 		}
 		
+		public int Pop()
+		{
+			balloons--;
+			return balloons;
+		}
+		
 		void Update()
 		{
-		
+			if (balloons == 0)
+				Destroy(gameObject);
 		}
 	}
 }

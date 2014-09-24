@@ -5,8 +5,10 @@ namespace Balloonteroids.Code.Scripts.Player
 {
 	public class Blowgun : MonoBehaviour
 	{
+		public const float COOLDOWN = 0.5f;
+	
 		public GameObject Bullet;
-		float Cooldown = 0.3f;
+		float Cooldown = COOLDOWN;
 
 		void Start()
 		{
@@ -19,13 +21,13 @@ namespace Balloonteroids.Code.Scripts.Player
 			{
 				Cooldown -= Time.deltaTime;
 				if (Cooldown < 0)
-					Cooldown = 0.5f;
+					Cooldown = COOLDOWN;
 			}
 		}
 		
 		public void Shoot()
 		{
-			if (Cooldown == 0.5f)
+			if (Cooldown == COOLDOWN)
 			{
 				Cooldown -= 0.0001f;
 				GameObject g = GameObject.Instantiate(Bullet) as GameObject;
