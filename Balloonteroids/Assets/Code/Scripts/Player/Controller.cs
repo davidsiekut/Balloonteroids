@@ -10,7 +10,7 @@ namespace Balloonteroids.Code.Scripts.Player
 		public float TurnSpeed = 0.0f;
 		public GameObject Jetpack;
 		public GameObject Blowgun;
-		public bool CanControl = true;
+		public bool CanControl = false;
 		
 		Animator animator;
 		

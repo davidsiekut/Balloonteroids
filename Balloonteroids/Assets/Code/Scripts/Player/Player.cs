@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Balloonteroids.Code.Scripts.Game;
 
 namespace Balloonteroids.Code.Scripts.Player
 {
 	public class Player : MonoBehaviour
 	{
-		int lives = 3;
+		public AudioClip Death;
 		Controller PlayerController;
+		public GameObject LifeCounter;
 	
 		void Start()
 		{
@@ -32,29 +34,37 @@ namespace Balloonteroids.Code.Scripts.Player
 		
 		IEnumerator DeathAnimation()
 		{
+			AudioSource.PlayClipAtPoint(Death, transform.position);
+		
+			float deathTime = 7.0f;
 			float i = 0;
-			while(transform.localScale.x > 0)
+			while(deathTime > 0)
 			{
-				transform.localScale = new Vector3(transform.localScale.x - 0.01f, 
-				                                        transform.localScale.y - 0.01f,
+				if (transform.localScale.x > 0)
+				{
+					transform.localScale = new Vector3(transform.localScale.x - 0.0025f, 
+				                                        transform.localScale.y - 0.0025f,
 				                                        transform.localScale.z);
+				}
 				
 				transform.Rotate(Vector3.forward, 10.0f);
 				
-				float x = (i / 20.0f) * Mathf.Cos(i * 20);
-				float y = (i / 20.0f) * Mathf.Sin(i * 20);
+				float x = (i / 40.0f) * Mathf.Cos(i * 40);
+				float y = (i / 40.0f) * Mathf.Sin(i * 40);
 				
 				Vector3 p = transform.position;
 				p.x += x;
 				p.y += y;
 				transform.position = p;
 				
+				deathTime -= Time.deltaTime;
 				i += 0.01f;
 				yield return null;
 			}
 			
-			lives--;
-			if (lives < 0)
+			LifeCounter.GetComponent<LifeCounter>().LoseLife();
+			GameController.Lives--;
+			if (GameController.Lives == 0)
 				gameOver();
 			else
 				spawn();

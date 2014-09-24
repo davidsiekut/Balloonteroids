@@ -7,7 +7,7 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 	{
 		float Acceleration = 10.0f;
 		float MaxSpeed = 0.5f;
-		int health = 0;
+		//int health = 0;
 		
 		void Start()
 		{

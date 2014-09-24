@@ -9,6 +9,7 @@ namespace Balloonteroids.Code.Scripts.Balloon
 	public class Balloon : MonoBehaviour
 	{
 		public Sprite[] Sprites;
+		public AudioClip Pop;
 
 		void Start()
 		{
@@ -25,6 +26,7 @@ namespace Balloonteroids.Code.Scripts.Balloon
 			
 			if (other.name == "Bullet(Clone)")
 			{
+				AudioSource.PlayClipAtPoint(Pop, transform.position);
 				if (transform.parent.GetComponent<BalloonFactory>().Pop() == 0)
 				{
 					GameController.ShowScorePopup(transform.position, 2);
