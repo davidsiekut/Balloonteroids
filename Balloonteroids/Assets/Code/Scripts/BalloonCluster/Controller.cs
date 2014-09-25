@@ -46,5 +46,10 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 			//if (transform.childCount == 0)
 			//	Destroy(gameObject);
 		}
+		
+		public void SpeedUp()
+		{
+			MaxSpeed *= 2;
+		}
 	}
 }

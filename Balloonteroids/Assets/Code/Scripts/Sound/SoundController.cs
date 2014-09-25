@@ -15,7 +15,14 @@ namespace Balloonteroids.Code.Scripts.Sound
 
 		public void ToggleBGM()
 		{
-			BGM.Play();
+			if (BGM.isPlaying)
+			{
+				BGM.Pause();
+			}
+			else
+			{
+				BGM.Play();
+			}
 		}
 	}
 }

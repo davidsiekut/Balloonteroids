@@ -7,9 +7,11 @@ namespace Balloonteroids.Code.Scripts.Player
 	public class Player : MonoBehaviour
 	{
 		public AudioClip Death;
+		public AudioClip GameOver;
 		Controller PlayerController;
 		public GameObject LifeCounter;
-	
+		public GameObject GameOverScreen;
+
 		void Start()
 		{
 			PlayerController = GetComponent<Controller>();
@@ -34,8 +36,9 @@ namespace Balloonteroids.Code.Scripts.Player
 		
 		IEnumerator DeathAnimation()
 		{
+			GetComponent<Animator>().SetBool("IsShooting", false);
 			AudioSource.PlayClipAtPoint(Death, transform.position);
-		
+
 			float deathTime = 7.0f;
 			float i = 0;
 			while(deathTime > 0)
@@ -59,6 +62,11 @@ namespace Balloonteroids.Code.Scripts.Player
 				
 				deathTime -= Time.deltaTime;
 				i += 0.01f;
+				
+				// fall behind clouds
+				if (deathTime < 5)
+					GetComponent<SpriteRenderer>().sortingOrder = -2;
+				
 				yield return null;
 			}
 			
@@ -72,14 +80,31 @@ namespace Balloonteroids.Code.Scripts.Player
 		
 		void spawn()
 		{
-			transform.position = new Vector3(0, 0, 3);
+			transform.position = new Vector3(0, 0, 0);
 			transform.localScale = new Vector3(1, 1, 1);
+			GetComponent<SpriteRenderer>().sortingOrder = 0;
 			PlayerController.CanControl = true;
 		}
 		
 		void gameOver()
 		{
+			AudioSource.PlayClipAtPoint(GameOver, transform.position);
+			GameOverScreen.SetActive(true);
+			StartCoroutine(BackToMainMenu());
+			Time.timeScale = 0;
+		}
 		
+		IEnumerator BackToMainMenu()
+		{
+			while (true)
+			{
+				if (Input.anyKeyDown)
+				{
+					Time.timeScale = 1;
+					Application.LoadLevel("MainMenu");
+				}    
+				yield return null;    
+			}
 		}
 	}
 }
