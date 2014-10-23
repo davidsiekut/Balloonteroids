@@ -9,6 +9,7 @@ namespace Balloonteroids.Code.Scripts.Player
 		public AudioClip Death;
 		public AudioClip GameOver;
 		public AudioClip Win;
+		public AudioClip Powerup;
 		Controller PlayerController;
 		public GameObject LifeCounter;
 		public GameObject GameOverScreen;
@@ -38,6 +39,7 @@ namespace Balloonteroids.Code.Scripts.Player
 		{
 			if (other.name == "Powerup(Clone)")
 			{
+				AudioSource.PlayClipAtPoint(Powerup, transform.position);
 				GameObject.Destroy(other.gameObject);
 				PlayerController.Powerup();
 			}

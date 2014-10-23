@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: 1c81b77c9d6f24ebe890325c86a0ce13
+guid: 975dd26cf82034733a943256d540f2ac
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Player 1
-    21300002: Player
-    21300004: Player_Idle
-    21300006: Player_Shooting
+    21300000: TitleScreen
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,17 +22,17 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -3
-  maxTextureSize: 256
+  textureFormat: -1
+  maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -46,26 +43,6 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: Player_Idle
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 42
-        height: 73
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Player_Shooting
-      rect:
-        serializedVersion: 2
-        x: 42
-        y: 0
-        width: 40
-        height: 73
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+    sprites: []
   spritePackingTag: 
   userData: 
