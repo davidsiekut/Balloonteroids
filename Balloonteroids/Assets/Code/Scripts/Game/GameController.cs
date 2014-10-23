@@ -19,7 +19,7 @@ namespace Balloonteroids.Code.Scripts.Game
 		static int score = 0;
 		
 		public GameObject SoundController;
-		public GameObject Player;
+		public static GameObject Player;
 		
 		public static int Lives;
 		
@@ -27,12 +27,18 @@ namespace Balloonteroids.Code.Scripts.Game
 		static int clustersPopped = 0;
 		
 		static List<GameObject> clusters;
+		static int balloonsTotal = 0;
+		static int balloonsLeft = 0;
 		
 		static int currentLevel = 0;
 		
+		static bool firstSpawned = false;
+		static bool secondSpawned = false;
+		static bool thirdSpawned = false;
+		
 		void Start()
 		{
-			Lives = 1;
+			Lives = 3;
 			currentLevel = 0;
 			clustersPopped = 0;
 			score = 0;
@@ -41,6 +47,7 @@ namespace Balloonteroids.Code.Scripts.Game
 			//Time.timeScale = 0;
 			MainCanvas = GameObject.FindWithTag("Canvas");
 			ScoreText = GameObject.FindWithTag("Score").GetComponent<Text>();
+			Player = GameObject.FindWithTag("Player");
 			StartCoroutine(BeginGame());
 		}
 		
@@ -64,6 +71,10 @@ namespace Balloonteroids.Code.Scripts.Game
 				yield return null;
 			}
 			
+			balloonsLeft = balloonsTotal;
+			
+			//Debug.Log("Total balloons: " + balloonsLeft);
+			
 			SoundController.GetComponent<SoundController>().ToggleBGM();
 			Player.GetComponent<Controller>().CanControl = true;
 		}
@@ -80,6 +91,16 @@ namespace Balloonteroids.Code.Scripts.Game
 			//}
 		}
 		
+		public static Vector2 GetPositionInFrontOfPlayer()
+		{
+			return Player.transform.position + Player.transform.forward * 5.0f;
+		}
+		
+		public static void BalloonPlusPlus(int b)
+		{
+			balloonsTotal += b;
+		}
+		
 		public static void ShowScorePopup(Vector3 position, int i)
 		{
 			GameObject g = GameObject.Instantiate(Resources.Load("Prefabs/UI/ScorePopup")) as GameObject;
@@ -94,17 +115,37 @@ namespace Balloonteroids.Code.Scripts.Game
 			score += i;
 			ScoreText.text = score + "";
 			
-			if (i == 2)
-				clustersPopped++;
+			// do not decrement if hotairballoon
+			if (i != 10)
+				balloonsLeft--;
+			Debug.Log("Balloons left: " + balloonsLeft + " out of " + balloonsTotal 
+			          + "(" + ((float)balloonsLeft / (float)balloonsTotal) * 100 + "%)");
 			
 			// speed up remaining
-			if (clustersPopped >= clustersPerLevel * 0.8)
+			if (balloonsLeft <= balloonsTotal * 0.8)
 			{
 				foreach (GameObject g in clusters)
 				{
 					if (g != null)
 						g.GetComponent<BalloonCluster.Controller>().SpeedUp();
 				}
+			}
+			
+			// spawn hot air balloon
+			if (balloonsLeft <= balloonsTotal * 0.9 && !firstSpawned)
+			{
+				GameObject.Instantiate(Resources.Load("Prefabs/Entity/HotAirBalloon"));
+				firstSpawned = true;
+			}
+			else if (balloonsLeft <= balloonsTotal * 0.6 && !secondSpawned)
+			{
+				GameObject.Instantiate(Resources.Load("Prefabs/Entity/HotAirBalloon"));
+				secondSpawned = true;
+			}
+			else if (balloonsLeft <= balloonsTotal * 0.3 && !thirdSpawned)
+			{
+				GameObject.Instantiate(Resources.Load("Prefabs/Entity/HotAirBalloon"));
+				thirdSpawned = true;
 			}
 			
 			if (clustersPopped >= clustersPerLevel)

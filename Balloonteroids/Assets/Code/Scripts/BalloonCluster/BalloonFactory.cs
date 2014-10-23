@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Balloonteroids.Code.Scripts.Game;
 
 namespace Balloonteroids.Code.Scripts.BalloonCluster
 {
@@ -23,6 +24,8 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 				g.transform.parent = this.transform;
 				g.transform.localPosition = new Vector3(x, y, 0);
 			}
+			
+			GameController.BalloonPlusPlus(balloons);
 		}
 		
 		public int Pop()

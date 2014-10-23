@@ -12,6 +12,8 @@ namespace Balloonteroids.Code.Scripts.Player
 		public GameObject LifeCounter;
 		public GameObject GameOverScreen;
 
+		bool GODMODE = false;
+
 		void Start()
 		{
 			PlayerController = GetComponent<Controller>();
@@ -19,12 +21,16 @@ namespace Balloonteroids.Code.Scripts.Player
 		
 		void FixedUpdate()
 		{
-		
+			if (Input.GetKeyDown(KeyCode.G))
+			{
+				GODMODE = !GODMODE;
+			}
 		}
 		
 		void OnTriggerEnter2D(Collider2D other)
 		{
-			if (PlayerController.CanControl && other.name == "Balloon(Clone)")
+			if (PlayerController.CanControl 
+				&& (other.name == "Balloon(Clone)" || other.name == "HotAirBalloon(Clone)") && !GODMODE)
 			{
 				Destroy(other.gameObject);
 				PlayerController.CanControl = false;

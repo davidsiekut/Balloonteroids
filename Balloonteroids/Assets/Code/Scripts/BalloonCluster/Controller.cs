@@ -49,7 +49,7 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 		
 		public void SpeedUp()
 		{
-			MaxSpeed *= 2;
+			MaxSpeed *= 1.2f;
 		}
 	}
 }

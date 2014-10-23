@@ -20,7 +20,7 @@ namespace Balloonteroids.Code.Scripts.Player
 		}
 		
 		void FixedUpdate()
-		{		
+		{
 			if (CanControl)
 			{
 				transform.Rotate(-Vector3.forward * Input.GetAxis("Horizontal") * TurnSpeed * Time.fixedDeltaTime); 
@@ -45,6 +45,7 @@ namespace Balloonteroids.Code.Scripts.Player
 				{
 					animator.SetBool("IsShooting", false);
 				}
+				
 			}
 		}
 	}
