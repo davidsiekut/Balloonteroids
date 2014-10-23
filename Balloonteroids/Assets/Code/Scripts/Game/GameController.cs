@@ -45,6 +45,11 @@ namespace Balloonteroids.Code.Scripts.Game
 			Lives = 3;
 			//currentLevel = 0;
 			//clustersPopped = 0;
+			balloonsTotal = 0;
+			balloonsLeft = 0;
+			firstSpawned = false;
+			secondSpawned = false;
+			thirdSpawned = false;
 			score = 0;
 			
 			clusters = new List<GameObject>();
