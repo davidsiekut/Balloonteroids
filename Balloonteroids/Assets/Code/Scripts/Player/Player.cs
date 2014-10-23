@@ -8,9 +8,11 @@ namespace Balloonteroids.Code.Scripts.Player
 	{
 		public AudioClip Death;
 		public AudioClip GameOver;
+		public AudioClip Win;
 		Controller PlayerController;
 		public GameObject LifeCounter;
 		public GameObject GameOverScreen;
+		public GameObject WinScreen;
 
 		bool GODMODE = false;
 
@@ -21,6 +23,11 @@ namespace Balloonteroids.Code.Scripts.Player
 		
 		void FixedUpdate()
 		{
+			if (GameController.HasWon)
+			{
+				youWin();
+			}
+		
 			if (Input.GetKeyDown(KeyCode.G))
 			{
 				GODMODE = !GODMODE;
@@ -29,8 +36,15 @@ namespace Balloonteroids.Code.Scripts.Player
 		
 		void OnTriggerEnter2D(Collider2D other)
 		{
+			if (other.name == "Powerup(Clone)")
+			{
+				GameObject.Destroy(other.gameObject);
+				PlayerController.Powerup();
+			}
+			
 			if (PlayerController.CanControl 
-				&& (other.name == "Balloon(Clone)" || other.name == "HotAirBalloon(Clone)") && !GODMODE)
+			    && (other.name == "Balloon(Clone)" || other.name == "HotAirBalloon(Clone)" || other.name == "WaterBalloon(Clone)")
+			    && !GODMODE)
 			{
 				Destroy(other.gameObject);
 				PlayerController.CanControl = false;
@@ -96,6 +110,14 @@ namespace Balloonteroids.Code.Scripts.Player
 		{
 			AudioSource.PlayClipAtPoint(GameOver, transform.position);
 			GameOverScreen.SetActive(true);
+			StartCoroutine(BackToMainMenu());
+			Time.timeScale = 0;
+		}
+		
+		public void youWin()
+		{
+			AudioSource.PlayClipAtPoint(Win, transform.position);
+			WinScreen.SetActive(true);
 			StartCoroutine(BackToMainMenu());
 			Time.timeScale = 0;
 		}

@@ -14,6 +14,8 @@ namespace Balloonteroids.Code.Scripts.Player
 		
 		Animator animator;
 		
+		float powerupTimer = 0.0f;
+		
 		void Start()
 		{
 			animator = GetComponent<Animator>();
@@ -37,16 +39,30 @@ namespace Balloonteroids.Code.Scripts.Player
 				
 				if (Input.GetButton("Jump"))
 				{
-					Blowgun.GetComponent<Blowgun>().Shoot();
-					// TODO sync with canShoot
+					if (powerupTimer > 0)
+					{
+						Blowgun.GetComponent<Blowgun>().ShootSpecial();
+					}
+					else
+					{
+						Blowgun.GetComponent<Blowgun>().Shoot();
+					}
+					
 					animator.SetBool("IsShooting", true);
 				}
 				else
 				{
 					animator.SetBool("IsShooting", false);
 				}
-				
 			}
+			
+			if (powerupTimer > 0)
+				powerupTimer -= Time.deltaTime;
+		}
+		
+		public void Powerup()
+		{
+			powerupTimer = 3.0f;
 		}
 	}
 }

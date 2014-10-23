@@ -47,7 +47,8 @@ public class HotAirBalloon : MonoBehaviour
 		
 		void throwBalloonAtPlayer()
 		{
-			Vector2 dest = GameController.GetPositionInFrontOfPlayer();
+			Vector2 dest = GameObject.FindGameObjectWithTag("Player").transform.position 
+				+ GameObject.FindGameObjectWithTag("Player").transform.forward * 5.0f;
 			Vector2 curr = new Vector2(this.transform.position.x, this.transform.position.y);
 			Vector2 dir = (dest - curr).normalized;
 			

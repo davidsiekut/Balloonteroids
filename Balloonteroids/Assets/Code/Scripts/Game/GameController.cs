@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,28 +19,32 @@ namespace Balloonteroids.Code.Scripts.Game
 		static int score = 0;
 		
 		public GameObject SoundController;
-		public static GameObject Player;
+		public GameObject Player;
+		public GameObject Powerup;
+		float powerupTimer = 20.0f;
 		
 		public static int Lives;
 		
-		static public int clustersPerLevel = 10;
-		static int clustersPopped = 0;
+		static public int clustersPerLevel = 5;
+		//static int clustersPopped = 0;
 		
 		static List<GameObject> clusters;
 		static int balloonsTotal = 0;
 		static int balloonsLeft = 0;
 		
-		static int currentLevel = 0;
+		//static int currentLevel = 0;
 		
 		static bool firstSpawned = false;
 		static bool secondSpawned = false;
 		static bool thirdSpawned = false;
 		
+		public static bool HasWon = false;
+		
 		void Start()
 		{
 			Lives = 3;
-			currentLevel = 0;
-			clustersPopped = 0;
+			//currentLevel = 0;
+			//clustersPopped = 0;
 			score = 0;
 			
 			clusters = new List<GameObject>();
@@ -89,11 +93,18 @@ namespace Balloonteroids.Code.Scripts.Game
 			//	g.transform.position = new Vector3(0, 5, 0);
 			//	clusters.Add(g);
 			//}
-		}
-		
-		public static Vector2 GetPositionInFrontOfPlayer()
-		{
-			return Player.transform.position + Player.transform.forward * 5.0f;
+			if (powerupTimer < 0)
+			{
+				powerupTimer = 10.0f;
+				
+				GameObject g = GameObject.Instantiate(Resources.Load("Prefabs/Entity/Powerup")) as GameObject;
+				
+				float x = UnityEngine.Random.Range(0.0f, 1.0f);
+				float y = UnityEngine.Random.Range(0.0f, 1.0f);
+				g.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(x, y, 4.0f));
+			}
+			
+			powerupTimer -= Time.deltaTime;
 		}
 		
 		public static void BalloonPlusPlus(int b)
@@ -109,7 +120,7 @@ namespace Balloonteroids.Code.Scripts.Game
 			addScore(i);
 			g.transform.parent = MainCanvas.transform;
 		}
-		
+
 		static void addScore(int i)
 		{
 			score += i;
@@ -118,8 +129,8 @@ namespace Balloonteroids.Code.Scripts.Game
 			// do not decrement if hotairballoon
 			if (i != 10)
 				balloonsLeft--;
-			Debug.Log("Balloons left: " + balloonsLeft + " out of " + balloonsTotal 
-			          + "(" + ((float)balloonsLeft / (float)balloonsTotal) * 100 + "%)");
+			//Debug.Log("Balloons left: " + balloonsLeft + " out of " + balloonsTotal 
+			//          + "(" + ((float)balloonsLeft / (float)balloonsTotal) * 100 + "%)");
 			
 			// speed up remaining
 			if (balloonsLeft <= balloonsTotal * 0.8)
@@ -148,10 +159,9 @@ namespace Balloonteroids.Code.Scripts.Game
 				thirdSpawned = true;
 			}
 			
-			if (clustersPopped >= clustersPerLevel)
+			if (balloonsLeft == 0)
 			{
-				currentLevel++;
-				// next level
+				HasWon = true;
 			}
 		}
 	}
