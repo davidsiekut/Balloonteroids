@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: a8ee7beb331144a10924f1fd7f6dfdcc
+guid: e8e5aab0531744b8cbc74498bfeb48f1
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HotAirBalloon
+    21300000: HotAirBalloon 1
+    21300002: HotAirBalloon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -23,7 +24,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 128
+  maxTextureSize: 1024
   textureSettings:
     filterMode: -1
     aniso: 1

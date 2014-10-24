@@ -26,7 +26,7 @@ namespace Balloonteroids.Code.Scripts.Game
 		
 		public static int Lives;
 		
-		static public int clustersPerLevel = 1;
+		static public int clustersPerLevel = 10;
 		//static int clustersPopped = 0;
 		
 		public static List<GameObject> clusters;
@@ -51,6 +51,7 @@ namespace Balloonteroids.Code.Scripts.Game
 			firstSpawned = false;
 			secondSpawned = false;
 			thirdSpawned = false;
+			HasWon = false;
 			score = 0;
 			
 			clusters = new List<GameObject>();

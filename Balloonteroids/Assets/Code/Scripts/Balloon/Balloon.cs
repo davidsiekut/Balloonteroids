@@ -29,7 +29,7 @@ namespace Balloonteroids.Code.Scripts.Balloon
 				Destroy(other.gameObject);
 			
 				AudioSource.PlayClipAtPoint(Pop, transform.position);
-				if (transform.parent.GetComponent<BalloonFactory>().Pop() == -1)
+				if (transform.parent.GetComponent<BalloonFactory>().Pop() == 0)
 				{
 					GameController.ShowScorePopup(transform.position, 2);
 				}

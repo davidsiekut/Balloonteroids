@@ -7,7 +7,7 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 	public class BalloonFactory : MonoBehaviour
 	{
 		public GameObject Balloon;
-		private int balloons;	
+		public int balloons;	
 		
 		void Start()
 		{
@@ -44,13 +44,13 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 				GameObject g = GameObject.Instantiate(Resources.Load("Prefabs/Entity/BalloonCluster")) as GameObject;
 				g.transform.position = this.transform.position;
 				
-				int children = this.transform.childCount - 1;
+				int children = this.transform.childCount;
 				//Debug.Log("Children in cluster: " + children);
 				for (int i = 0; i < children / 2; i++)
 				{
 					this.transform.GetChild(0).SetParent(g.transform);
 				}
-				
+				g.GetComponent<BalloonFactory>().balloons = g.transform.childCount;
 				GameController.clusters.Add(g);
 			}
 			
