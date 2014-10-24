@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Balloonteroids.Code.Scripts.Player;
 using Balloonteroids.Code.Scripts.Sound;
+using Balloonteroids.Code.Scripts.BalloonCluster;
 
 namespace Balloonteroids.Code.Scripts.Game
 {
@@ -25,10 +26,10 @@ namespace Balloonteroids.Code.Scripts.Game
 		
 		public static int Lives;
 		
-		static public int clustersPerLevel = 5;
+		static public int clustersPerLevel = 1;
 		//static int clustersPopped = 0;
 		
-		static List<GameObject> clusters;
+		public static List<GameObject> clusters;
 		static int balloonsTotal = 0;
 		static int balloonsLeft = 0;
 		
@@ -75,6 +76,7 @@ namespace Balloonteroids.Code.Scripts.Game
 			for(int i = 0; i < clustersPerLevel; i++)
 			{
 				GameObject g = GameObject.Instantiate(BalloonCluster) as GameObject;
+				g.GetComponent<BalloonFactory>().Populate();
 				g.transform.position = new Vector3(0, 5, 0);
 				clusters.Add(g);
 				yield return null;
@@ -85,7 +87,7 @@ namespace Balloonteroids.Code.Scripts.Game
 			//Debug.Log("Total balloons: " + balloonsLeft);
 			
 			SoundController.GetComponent<SoundController>().ToggleBGM();
-			Player.GetComponent<Controller>().CanControl = true;
+			Player.GetComponent<Balloonteroids.Code.Scripts.Player.Controller>().CanControl = true;
 		}
 		
 		void Update()

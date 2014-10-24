@@ -26,8 +26,10 @@ namespace Balloonteroids.Code.Scripts.Balloon
 			
 			if (other.name == "Bullet(Clone)")
 			{
+				Destroy(other.gameObject);
+			
 				AudioSource.PlayClipAtPoint(Pop, transform.position);
-				if (transform.parent.GetComponent<BalloonFactory>().Pop() == 0)
+				if (transform.parent.GetComponent<BalloonFactory>().Pop() == -1)
 				{
 					GameController.ShowScorePopup(transform.position, 2);
 				}
@@ -36,7 +38,7 @@ namespace Balloonteroids.Code.Scripts.Balloon
 					GameController.ShowScorePopup(transform.position, 1);
 				}
 
-				Destroy(other.gameObject);
+
 				Destroy(this.gameObject);
 			}
 		}

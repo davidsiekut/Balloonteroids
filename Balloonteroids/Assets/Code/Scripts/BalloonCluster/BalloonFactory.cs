@@ -7,9 +7,14 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 	public class BalloonFactory : MonoBehaviour
 	{
 		public GameObject Balloon;
-		private int balloons;
+		private int balloons;	
 		
 		void Start()
+		{
+
+		}
+		
+		public void Populate()
 		{
 			int r = UnityEngine.Random.Range(1, 10);
 			balloons = r;
@@ -30,14 +35,33 @@ namespace Balloonteroids.Code.Scripts.BalloonCluster
 		
 		public int Pop()
 		{
-			balloons--;
+			balloons--; // the one that just popped
+			
+			if (balloons > 1)
+			{
+				balloons /= 2; // half will pop off
+			
+				GameObject g = GameObject.Instantiate(Resources.Load("Prefabs/Entity/BalloonCluster")) as GameObject;
+				g.transform.position = this.transform.position;
+				
+				int children = this.transform.childCount - 1;
+				//Debug.Log("Children in cluster: " + children);
+				for (int i = 0; i < children / 2; i++)
+				{
+					this.transform.GetChild(0).SetParent(g.transform);
+				}
+				
+				GameController.clusters.Add(g);
+			}
+			
+			Debug.Log(balloons);
 			return balloons;
 		}
 		
 		void Update()
 		{
-			if (balloons == 0)
-				Destroy(gameObject);
+			//if (balloons == 0)
+				//Destroy(gameObject);
 		}
 	}
 }
